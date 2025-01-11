@@ -62,3 +62,46 @@ try:
     print(next(my_iterator))  # 将引发 StopIteration 异常
 except StopIteration:
     print("迭代器已经耗尽")
+
+print("\n6. 自定义迭代器:")
+
+class MyIterator:
+    def __init__(self):
+        self.data = []
+        self.index = 0
+        
+    def add(self, name, age):
+        self.data.append({"name": name, "age": age})
+        
+    def __iter__(self):
+        self.index = 0  # 重置索引，允许多次迭代
+        return self
+    
+    def __next__(self):
+        if self.index < len(self.data):
+            result = self.data[self.index]
+            self.index += 1
+            return result
+        else:
+            raise StopIteration
+        
+# 创建自定义迭代器对象
+my_iterator1 = MyIterator()
+my_iterator1.add("Alice", 25)
+my_iterator1.add("Bob", 30)
+my_iterator1.add("Charlie", 35)
+
+# 使用 next() 函数
+print(next(my_iterator1))  # 输出: {'name': 'Alice', 'age': 25}
+print(next(my_iterator1))  # 输出: {'name': 'Bob', 'age': 30}
+print(next(my_iterator1))  # 输出: {'name': 'Charlie', 'age': 35}
+print(next(my_iterator1))  # 引发 StopIteration 异常
+# 使用 for 循环
+for person in my_iterator1:
+    print(f"{person['name']} is {person['age']} years old.")
+
+
+
+
+
+
