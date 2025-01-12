@@ -29,5 +29,3 @@ print(fun1.send(None))
 print(fun1.send(5))
 print(fun1.send(None))
 print(fun1.send(None))
-
-# 协程的解释
